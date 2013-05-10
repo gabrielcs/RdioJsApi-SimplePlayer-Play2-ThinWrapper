@@ -1,7 +1,59 @@
-@(message: String)
+@(rdioClientId: String)
 
-@main("Welcome to Play 2.1") {
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Player</title>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/normalize.css")">
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/main.css")">
+
+    <script src="https://www.rdio.com/api/api.js?client_id=@rdioClientId"></script>
+    <script src="@routes.Assets.at("javascripts/jquery-1.9.1.min.js")"></script>
+    <script src="@routes.Assets.at("javascripts/modernizr.touch.js")"></script>
+    <script src="@routes.Assets.at("javascripts/underscore-1.4.4.min.js")"></script>
+    <script src="@routes.Assets.at("javascripts/main.js")"></script>
+    <script id="album-template" type="text/template">
+      <span class="album">
+        <div class="icon" style="background-image: url(<%= icon %>)">
+          <div class="buttons">
+            <span class="play btn">Play Album</span>
+            <a href="http://www.rdio.com<%= url %>" target="_blank" class="site btn">View on Rdio.com</a>
+            <a href="<%= appUrl %>" target="_blank" class="app btn">View in Rdio app</a>
+          </div>          
+        </div>
+        <div class="title label"><%= name %></div>
+        <div class="artist label"><%= artist %></div>
+      </span>
+    </script>
+  </head>
+  <body>
+    <div class="no-rdio">
+      <p>Unable to contact Rdio API.</p>
+    </div>
+    <div class="header">
+      <div class="section">
+        <img class="icon">
+      </div>
+      <div class="section">
+        <button class="play">play</button>
+        <button class="next">next</button>
+        <button class="prev">previous</button>
+      </div>
+      <div class="section">
+        <div class="track label">Not Playing</div>
+        <div class="album-title label"></div>
+        <div class="artist label"></div>
+      </div>
+    </div>
+    <form class="search">
+      Enter an artist or album name: 
+      <input type="text"/>
+      <button type="submit">Search</button>
+      <div class="error"></div>
+    </form>
+    <div class="results"></div>
     
-    @play20.welcome(message, style = "Java")
-    
-}
+  </body>
+</html>

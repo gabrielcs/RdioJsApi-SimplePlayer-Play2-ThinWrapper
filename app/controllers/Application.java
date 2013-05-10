@@ -1,18 +1,22 @@
 package controllers;
 
-import play.*;
-import play.mvc.*;
-
-import views.html.*;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.index;
+import views.html.rdiohelper;
 
 public class Application extends Controller {
-  
-    public static Result index() {
-        return ok(index.render("Your new application is ready."));
-    }
-    
-    public static Result rdiohelper() {
-        return ok(views.html.rdiohelper.render());
-    }
-  
+	/*
+	 * Register your app at http://www.rdio.com/developers/create/ and replace
+	 * rdioClientId below with yours
+	 */
+	private static String rdioClientId = "ppJo1acOvcWl8ZlpTnXUkA";
+
+	public static Result index() {
+		return ok(index.render(rdioClientId));
+	}
+
+	public static Result rdioHelper() {
+		return ok(rdiohelper.render());
+	}
 }
